@@ -42,7 +42,7 @@ KEY=`fw_printenv -n wifi_key`
 SEQ=`fw_printenv -n wifi_seq`
 [ -n "${SSID}" ] || { \
 	MAC=$(dd bs=1 skip=7 count=3 if=/dev/mtd2 2>/dev/null | hexdump -v -n 3 -e '3/1 "%02X"')
-	SSID=LinkIt_Smart_7688_${MAC}
+	SSID=Mobifone_GW_${MAC}
 }
 [ -n "${SEQ}" ] || \
 	SEQ=1
@@ -58,6 +58,10 @@ uci set network.wan=interface
 uci set network.wan.proto=dhcp
 
 uci set mountd.mountd.path=/Media/
+#config for 4G/LTE
+uci set network.lte=interface
+uci set network.lte.proto=dhcp
+uci set network.lte.ifname=eth1
 
 uci commit
 return 0

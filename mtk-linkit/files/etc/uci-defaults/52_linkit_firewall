@@ -15,4 +15,7 @@ set_wan_fw() {
 }
 
 config_foreach set_wan_fw zone
+
+uci add_list firewall.@zone[1].network='lte'
+uci commit firewall
 exit 0
